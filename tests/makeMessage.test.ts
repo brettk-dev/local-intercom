@@ -24,8 +24,9 @@ describe('makeMessage', () => {
     expect(msg.payload).to.deep.equal(complexMessage)
   })
 
-  it('throws an error when no message type is provided', () => {
-    expect(() => makeMessage(undefined, simpleMessage)).to.throw()
+  it('throws an error if no type is provided', () => {
+    // @ts-ignore
+    expect(() => makeMessage()).to.throw()
   })
 
   it('does not throw an error when no payload is provided', () => {
