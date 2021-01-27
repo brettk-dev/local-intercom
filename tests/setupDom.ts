@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom'
 
-export const setupStorage = () => {
+export const setupDom = () => {
   const dom = new JSDOM('', {
     url: 'http://localhost'
   })
@@ -15,4 +15,6 @@ export const setupStorage = () => {
     clear() {},
     key(index: number): string | null { return null }
   }
+
+  return dom
 }

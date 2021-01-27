@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import { send } from '../src/send'
 import { config } from '../src/config'
-import { setupStorage } from './setupStorage'
+import { setupDom } from './setupDom'
 
 chai.should()
 chai.use(sinonChai)
@@ -22,11 +22,11 @@ const complexData = {
 
 describe('send', () => {
   before(() => {
-    setupStorage()
+    setupDom()
   })
 
   it('uses local storage to send a message.', () => {
-    const setItemSpy = sinon.spy(window.localStorage, 'setItem')
+    const setItemSpy = sinon.spy(localStorage, 'setItem')
     send(simpleData.type)
     
     expect(setItemSpy).to.have.been.calledOnceWith(
@@ -39,8 +39,8 @@ describe('send', () => {
 
   it('clears the local storage key after.', () => {
     const clock = sinon.useFakeTimers()
-    const setItemSpy = sinon.spy(window.localStorage, 'setItem')
-    const removeItemSpy = sinon.spy(window.localStorage, 'removeItem')
+    const setItemSpy = sinon.spy(localStorage, 'setItem')
+    const removeItemSpy = sinon.spy(localStorage, 'removeItem')
     send(simpleData.type)
     clock.tick(1)
     
