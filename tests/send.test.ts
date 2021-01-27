@@ -1,9 +1,9 @@
 import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import jsdom, { JSDOM } from 'jsdom'
 import { send } from '../src/send'
 import { config } from '../src/config'
+import { setupStorage } from './setupStorage'
 
 chai.should()
 chai.use(sinonChai)
@@ -11,7 +11,6 @@ chai.use(sinonChai)
 const simpleData = {
   type: 'test'
 }
-
 const complexData = {
   type: 'test',
   payload: {
@@ -21,24 +20,11 @@ const complexData = {
   }
 }
 
-const dom = new JSDOM('', {
-  url: 'http://localhost'
-})
-global.document = dom.window.document
-// @ts-ignore
-global.window = {
-  ...dom.window,
-  localStorage: {
-    setItem(key: string, value: string) {},
-    getItem(key: string): string { return '' },
-    removeItem(key:string) {},
-    length: 0,
-    clear() {},
-    key(index: number): string | null { return null }
-  }
-}
-
 describe('send', () => {
+  before(() => {
+    setupStorage()
+  })
+
   it('uses local storage to send a message.', () => {
     const setItemSpy = sinon.spy(window.localStorage, 'setItem')
     send(simpleData.type)
