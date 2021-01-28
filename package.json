@@ -5,15 +5,16 @@
   "main": "bin/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register tests/**/*.test.ts",
-    "commit": "git add . && git-cz && git push"
+    "commit": "git add . && git-cz && git push",
+    "dev": "rm -rf bin/**/* && rollup -c --watch",
+    "build": "rm -rf bin/**/* && rollup -c"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "underscore": "^1.12.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@rollup/plugin-typescript": "^8.1.0",
     "@types/chai": "^4.2.14",
     "@types/jsdom": "^16.2.6",
     "@types/mocha": "^8.2.0",
@@ -26,10 +27,12 @@
     "jsdom": "^16.4.0",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
+    "rollup": "^2.38.1",
     "sinon": "^9.2.4",
     "sinon-chai": "^3.5.0",
     "standard-version": "^9.1.0",
     "ts-node": "^9.1.1",
+    "tslib": "^2.1.0",
     "typescript": "^4.1.3"
   },
   "config": {

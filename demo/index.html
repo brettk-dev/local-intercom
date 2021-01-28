@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Intercom Demo</title>
+    <style>
+      #output {
+        border: 1px solid black;
+        border-radius: 4px;
+      }
+
+      #output p {
+        margin: 2px;
+        padding: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="output">
+    </div>
+
+    <form id="msg-form">
+      <input type="text" id="msg-input" />
+      <button type="submit">Send</button>
+    </form>
+
+    <script src="../bin/index.js"></script>
+    <script>
+      const msgForm = document.querySelector('#msg-form')
+      const msgInput = document.querySelector('#msg-input')
+      const output = document.querySelector('#output')
+
+      msgForm.addEventListener('submit', (event) => {
+              event.preventDefault()
+              localIntercom.send('chat', msgInput.value)
+              msgInput.value = ''
+            })
+
+      localIntercom.listen('chat', (msg) => {
+              const p = document.createElement('p')
+              p.textContent = msg
+              output.append(p)
+            })
+    </script>
+  </body>
+</html>
