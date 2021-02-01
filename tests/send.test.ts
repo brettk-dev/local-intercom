@@ -5,7 +5,6 @@ import { send } from '../src/send'
 import { config } from '../src/config'
 import { setupDom } from './setupDom'
 
-chai.should()
 chai.use(sinonChai)
 
 const simpleData = {
@@ -28,7 +27,7 @@ describe('send', () => {
   it('uses local storage to send a message.', () => {
     const setItemSpy = sinon.spy(localStorage, 'setItem')
     send(simpleData.type)
-    
+
     expect(setItemSpy).to.have.been.calledOnceWith(
       config.KEY,
       JSON.stringify(simpleData)
@@ -43,7 +42,7 @@ describe('send', () => {
     const removeItemSpy = sinon.spy(localStorage, 'removeItem')
     send(simpleData.type)
     clock.tick(1)
-    
+
     expect(removeItemSpy).to.have.been.calledAfter(setItemSpy)
     expect(removeItemSpy).to.have.been.calledOnceWith(config.KEY)
 

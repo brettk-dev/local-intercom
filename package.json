@@ -4,7 +4,7 @@
   "description": "Sends messages between local browser tabs and windows.",
   "main": "bin/index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "test": "mocha",
     "commit": "git add . && git-cz && git push",
     "dev": "rm -rf bin/**/* && rollup -c --watch",
     "build": "rm -rf bin/**/* && rollup -c"

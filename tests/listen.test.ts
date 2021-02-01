@@ -19,7 +19,7 @@ describe('listen', () => {
     listen('test', fn)
 
     window.localStorage.setItem(config.KEY, '{"type":"test"}')
-    const event = new dom.window.StorageEvent('storage', { bubbles: true })
+    const event = new dom.window.StorageEvent('storage', { bubbles: true, newValue: '{"type":"test"}' })
     window.document.dispatchEvent(event)
 
     expect(fn).to.have.been.calledOnceWith()

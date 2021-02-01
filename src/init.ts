@@ -4,6 +4,7 @@ import { listeners } from './listen'
 
 export const init = () => {
   window.addEventListener('storage', (event) => {
+    console.log('event fired')
     const msg = event.newValue
     if (!msg) return
     try {
