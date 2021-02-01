@@ -11,7 +11,6 @@ export const init = () => {
       if (obj.type && Array.isArray(listeners[obj.type])) {
         listeners[obj.type].forEach(cb => {
           if (typeof cb === 'function') {
-            console.log(cb)
             cb(obj.payload)
           }
         })
